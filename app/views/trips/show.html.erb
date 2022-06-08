@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6 card">
+      <div class="card-body">
+        <h3 class="card-title">From: <%= @trip.starting_point %></h3>
+        <h3 class="card-title">To: <%= @trip.end_point %></h3>
+        <ul>
+          <li>NºPassengers: <%= @trip.number_of_passengers %></li>
+          <li>Start time: <%= @trip.departure_time %></li>
+        </ul>
+        <h5>Driver:</h5>
+        <p><%= @trip.user.first_name %> <%= @trip.user.last_name %></p>
+        <%= link_to 'Edit', edit_trip_path, class: "btn btn-secondary"%>
+        <%= link_to 'Destroy', @trip, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-secondary" %>
+        <%= link_to 'Back', trips_path, class:"btn btn-info"%>
+      </div>
+    </div>
+  </div>
+</div>
