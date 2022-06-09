@@ -20,7 +20,7 @@ class BookingsController < ApplicationController
     @booking.trip = @trip
     @booking.status = "pending"
     if @booking.save
-      redirect_to trip_booking_path(@booking)
+      redirect_to trip_booking_path(@trip, @booking)
     else
       render :new
     end
