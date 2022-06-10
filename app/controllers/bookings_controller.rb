@@ -19,7 +19,8 @@ class BookingsController < ApplicationController
     @booking.user = current_user
     @booking.trip = @trip
     @booking.status = "pending"
-    if @booking.save
+    if @booking.passengers <= @trip.number_of_passengers
+      @booking.save
       redirect_to trip_booking_path(@booking)
     else
       render :new
