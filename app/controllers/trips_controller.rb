@@ -2,7 +2,7 @@ class TripsController < ApplicationController
   before_action :set_trip, only: %i[show edit update destroy]
 
   def index
-    @trips = Trip.all
+    @trips = policy_scope(Trip).order(created_at: :desc)
   end
 
   def show
@@ -10,6 +10,7 @@ class TripsController < ApplicationController
 
   def new
     @trip = Trip.new
+    authorize @trip
   end
 
   def edit
@@ -18,6 +19,7 @@ class TripsController < ApplicationController
   def create
     @trip = Trip.new(trip_params)
     @trip.user = current_user
+    authorize @trip
 
     if @trip.save
       redirect_to @trip, notice: 'trip was successfully created.'
@@ -35,14 +37,18 @@ class TripsController < ApplicationController
   end
 
   def destroy
-    @trip.destroy
-    redirect_to trips_url, notice: 'trip was successfully destroyed.'
+    if @trip.destroy
+      redirect_to trips_url, notice: 'trip was successfully destroyed.'
+    else
+      render :root
+    end
   end
 
   private
 
   def set_trip
     @trip = Trip.find(params[:id])
+    authorize @trip
   end
 
   def trip_params
