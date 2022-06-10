@@ -1,1 +1,12 @@
-<h1> show </h1>
+<h1> Your Booking </h1>
+
+<h3>Status: <%= @booking.status %></h3>
+<h4>Driver: <%= @booking.trip.user.first_name %></h4>
+<ul>
+  <li>Passengers: <%= @booking.passengers %></li>
+  <li>From: <%= @booking.trip.starting_point %></li>
+  <li>To: <%= @booking.trip.end_point %></li>
+  <li>When: <%= @booking.trip.departure_time %></li>
+</ul>
+
+<%= link_to 'Back', trips_path, class:"btn btn-info"%>

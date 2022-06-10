@@ -17,8 +17,9 @@
           <h5>Driver:</h5>
           <p><%= trip.user.first_name %> <%= trip.user.last_name %></p>
           <%= link_to 'More Info', trip, class: "btn btn-primary"%>
-          <%= link_to 'Edit', trip, class: "btn btn-secondary"%>
+          <%= link_to 'Edit', edit_trip_path(trip), class: "btn btn-secondary"%>
           <%= link_to 'Destroy', trip, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-secondary" %>
+          <%= link_to 'Book', new_trip_booking_path(trip), class: "btn btn-secondary"%>
         </div>
       </div>
     <% end %>
