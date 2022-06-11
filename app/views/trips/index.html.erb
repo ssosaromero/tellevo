@@ -4,7 +4,7 @@
     <h1 style="font-family: 'Koulen';">Available Trips</h1>
   </div>
   <h1><%= link_to 'New Trip', new_trip_path, class:"btn btn-primary" %></h1>
-  <div class="row">
+  <div class="row" style= "margin: 1em">
     <% @trips.each do |trip| %>
       <% if trip.number_of_passengers - trip.passengers_count > 0 %>
         <div class="col-12 col-lg-3 card">
