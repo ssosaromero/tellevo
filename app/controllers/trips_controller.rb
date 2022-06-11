@@ -44,6 +44,10 @@ class TripsController < ApplicationController
     end
   end
 
+  def my_trips
+    @trips = policy_scope(Trip).where(user: current_user)
+  end
+
   private
 
   def set_trip

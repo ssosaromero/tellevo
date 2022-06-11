@@ -16,6 +16,10 @@ class TripPolicy < ApplicationPolicy
     return true
   end
 
+  def my_trips?
+    show?
+  end
+
   def update?
     user_is_owner_or_admin?
   end
@@ -30,7 +34,7 @@ class TripPolicy < ApplicationPolicy
     # el record sobre el cual autorice
     # current_user = user
     # @restaurant => record
-    user == record.user  # de esta forma en caso de ser admin, me entrega true
+    user == record.user # de esta forma en caso de ser admin, me entrega true
   end
 
 
