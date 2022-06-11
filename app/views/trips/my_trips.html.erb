@@ -9,6 +9,7 @@
         <ul>
           <li>NºPassengers: <%= trip.number_of_passengers %></li>
           <li>Start time: <%= trip.departure_time %></li>
+          <li>Available seats: <%= trip.number_of_passengers - trip.passengers_count %></li>
         </ul>
         <h5>Driver:</h5>
         <p><%= trip.user.first_name %> <%= trip.user.last_name %></p>
@@ -31,7 +32,9 @@
             <li>NºPassengers <%= booking.passengers %></li>
             <li>Passengers: <%= booking.user.first_name %> <%= booking.user.last_name %></li>
           </ul>
-          <%= link_to 'Accept', accept_booking_path(booking), method: :put, class: "btn btn-secondary"%>
+          <% if booking.trip.number_of_passengers - booking.trip.passengers_count > 0 %>
+            <%= link_to 'Accept', accept_booking_path(booking), method: :put, class: "btn btn-secondary"%>
+          <% end %>
           <%= link_to 'Reject', reject_booking_path(booking), method: :put, class: "btn btn-secondary"%>
         <% end %>
       </div>

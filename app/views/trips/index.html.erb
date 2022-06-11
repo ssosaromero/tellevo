@@ -6,30 +6,33 @@
   <h1><%= link_to 'New Trip', new_trip_path, class:"btn btn-primary" %></h1>
   <div class="row">
     <% @trips.each do |trip| %>
-      <div class="col-12 col-lg-3 card">
-        <div class="card-body">
-          <h3 class="card-title">From: <%= trip.starting_point %></h3>
-          <h3 class="card-title">To: <%= trip.end_point %></h3>
-          <ul>
-            <li>NºPassengers: <%= trip.number_of_passengers %></li>
-            <li>Start time: <%= trip.departure_time %></li>
-          </ul>
-          <h5>Driver:</h5>
-          <p><%= trip.user.first_name %> <%= trip.user.last_name %></p>
-          <% if policy(trip).show? %>
-           <%= link_to 'More Info', trip, class: "btn btn-primary"%>
-          <% end %>
-          <% if policy(trip).edit? %>
-            <%= link_to 'Edit', edit_trip_path(trip), class: "btn btn-secondary"%>
-          <% end %>
-          <% if policy(trip).destroy? %>
-            <%= link_to 'Destroy', trip, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-secondary" %>
-          <% end %>
-          <% if !policy(trip).edit? %>
-            <%= link_to 'Book', new_trip_booking_path(trip), class: "btn btn-secondary"%>
-          <% end %>
+      <% if trip.number_of_passengers - trip.passengers_count > 0 %>
+        <div class="col-12 col-lg-3 card">
+          <div class="card-body">
+            <h3 class="card-title">From: <%= trip.starting_point %></h3>
+            <h3 class="card-title">To: <%= trip.end_point %></h3>
+            <ul>
+              <li>NºPassengers: <%= trip.number_of_passengers %></li>
+              <li>Start time: <%= trip.departure_time %></li>
+              <li>Available seats: <%= trip.number_of_passengers - trip.passengers_count %></li>
+            </ul>
+            <h5>Driver:</h5>
+            <p><%= trip.user.first_name %> <%= trip.user.last_name %></p>
+            <% if policy(trip).show? %>
+            <%= link_to 'More Info', trip, class: "btn btn-primary"%>
+            <% end %>
+            <% if policy(trip).edit? %>
+              <%= link_to 'Edit', edit_trip_path(trip), class: "btn btn-secondary"%>
+            <% end %>
+            <% if policy(trip).destroy? %>
+              <%= link_to 'Destroy', trip, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-secondary" %>
+            <% end %>
+            <% if !policy(trip).edit? %>
+              <%= link_to 'Book', new_trip_booking_path(trip), class: "btn btn-secondary"%>
+            <% end %>
+          </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
   </div>
 </div>
