@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Koulen&display=swap');
+
+.title-form {
+  margin: 1em auto;
+  display: flex;
+  justify-content: center;
+  font-family: 'Koulen';
+}
+
+.form-control:focus {
+  border: 2px solid #B5BD00 !important;
+  box-shadow: none !important;
+}
+
+.form-control input {
+  width: 19.5em;
+}
