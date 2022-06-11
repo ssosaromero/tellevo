@@ -1,12 +1,11 @@
 class BookingsController < ApplicationController
+  before_action :set_booking, only: %i[show edit update destroy]
 
   def index
     @bookings = Booking.all
   end
 
   def show
-    @booking = Booking.find(params[:id])
-    authorize @booking
   end
 
   def new
@@ -35,23 +34,23 @@ class BookingsController < ApplicationController
       flash[:notice] = "Error en la capacidad"
       render :new
     end
+
   end
 
-  # def edit
-  #   @booking = Booking.find(params[:id])
-  # end
+  def edit
+  end
 
-  # def update
-  #   @booking = Booking.find(params[:id])
-  #   if @booking.update(booking_params)
-  #     redirect_to booking_path(@booking)
-  #   else
-  #     render :new
-  #   end
-  # end
+  def update
+    if @booking.update(booking_params)
+      @booking.status = "pending"
+      @booking.save
+      redirect_to my_bookings_path
+    else
+      render :new
+    end
+  end
 
   def destroy
-    @booking = Booking.find(params[:id])
     @booking.destroy
     redirect_to bookings_path(@booking)
   end
@@ -72,9 +71,18 @@ class BookingsController < ApplicationController
     redirect_to my_trips_path
   end
 
+  def my_bookings
+    @bookings = policy_scope(Booking).where(user: current_user)
+  end
+
   private
 
   def booking_params
     params.require(:booking).permit(:user, :trip, :status, :passengers)
+  end
+
+  def set_booking
+    @booking = Booking.find(params[:id])
+    authorize @booking
   end
 end
