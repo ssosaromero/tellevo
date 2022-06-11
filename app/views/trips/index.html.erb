@@ -25,7 +25,9 @@
           <% if policy(trip).destroy? %>
             <%= link_to 'Destroy', trip, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-secondary" %>
           <% end %>
-          <%= link_to 'Book', new_trip_booking_path(trip), class: "btn btn-secondary"%>
+          <% if !policy(trip).edit? %>
+            <%= link_to 'Book', new_trip_booking_path(trip), class: "btn btn-secondary"%>
+          <% end %>
         </div>
       </div>
     <% end %>
