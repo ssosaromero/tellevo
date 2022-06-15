@@ -12,6 +12,10 @@ class TripsController < ApplicationController
   end
 
   def show
+    @markers = [{
+        lat: @trip.latitude,
+        lng: @trip.longitude
+      }]
   end
 
   def new
