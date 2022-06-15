@@ -3,16 +3,10 @@ class TripsController < ApplicationController
 
   def index
     @trips = policy_scope(Trip).order(created_at: :desc)
-    @markers = @trips.geocoded.map do |trip|
-      {
-        lat: trip.latitude,
-        lng: trip.longitude
-      }
-    end
   end
 
   def show
-    @markers = [{
+    @marker = [{
         lat: @trip.latitude,
         lng: @trip.longitude
       }]
