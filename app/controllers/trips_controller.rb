@@ -2,14 +2,22 @@ class TripsController < ApplicationController
   before_action :set_trip, only: %i[show edit update destroy]
 
   def index
-    @trips = policy_scope(Trip).order(created_at: :desc)
+    if params[:query].present?
+      sql_query = " \
+        trips.starting_point @@ :query \
+        OR trips.end_point @@ :query \
+      "
+      @trips = policy_scope(Trip).where(sql_query, query: "%#{params[:query]}%")
+    else
+      @trips = policy_scope(Trip).order(created_at: :desc)
+    end
   end
 
   def show
     @marker = [{
-        lat: @trip.latitude,
-        lng: @trip.longitude
-      }]
+      lat: @trip.latitude,
+      lng: @trip.longitude
+    }]
   end
 
   def new
