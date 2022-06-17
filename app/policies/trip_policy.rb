@@ -2,9 +2,11 @@ class TripPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
+      if user.admin?
       scope.all
       # For a multi-tenant SaaS app, you may want to use:
       # scope.where(user: user)
+      end
     end
   end
 
@@ -34,17 +36,6 @@ class TripPolicy < ApplicationPolicy
     # el record sobre el cual autorice
     # current_user = user
     # @restaurant => record
-    user == record.user # de esta forma en caso de ser admin, me entrega true
+    user == record.user || user.admin # de esta forma en caso de ser admin, me entrega true
   end
-
-
-
-
-
-
-
-
-
-
-
 end
