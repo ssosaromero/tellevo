@@ -1,7 +1,9 @@
 class BookingPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
+      if user.admin?
       scope.all
+      end
     end
   end
 
@@ -14,11 +16,11 @@ class BookingPolicy < ApplicationPolicy
   end
 
   def update?
-    user_is_owner?
+    user_is_owner_or_admin?
   end
 
   def destroy?
-    user_is_owner?
+    user_is_owner_or_admin?
   end
 
   def accept_booking?
@@ -36,9 +38,9 @@ end
 
 private
 
-def user_is_owner?
+def user_is_owner_or_admin?
   # el record sobre el cual autorice
   # current_user = user
   # @restaurant => record
-  user == record.user # de esta forma en caso de ser admin, me entrega true
+  user == record.user || user.admin # de esta forma en caso de ser admin, me entrega true
 end
