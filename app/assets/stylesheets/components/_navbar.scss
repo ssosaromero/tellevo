@@ -8,5 +8,33 @@
 }
 
 .navbar-lewagon .navbar-brand img {
+  border-radius: 50%;
+  background-position: center;
+  background-size: cover;
   width: 40px;
+  height: 40px;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: white !important;
+}
+
+.dropdown-menu {
+  background: white !important;
+  border-radius: 10px;
+  border-color: #1C658C;
+}
+
+.dropdown-item{
+  color: #1C658C !important;
+  &:hover {
+    background: #1C658C !important; opacity:0.5;
+    color: white !important;
+    border-radius: 6px;
+  }
+}
+
+.margin {
+  margin-top: -9px;
+  margin-left: 4px;
 }

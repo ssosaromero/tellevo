@@ -12,7 +12,7 @@
     <%= f.input :starting_point,
                 input_html: { data: { geocoder_target: "address" }, class: "d-none" },
                 wrapper_html: { data: { controller: "geocoder", geocoder_api_key_value: ENV['MAPBOX_API_KEY'] } }%>
-    <%= f.input :end_point %>
+    <%= f.input :end_point, required: true %>
     <%= f.input :departure_time %>
     <%= f.input :number_of_passengers %>
   </div>

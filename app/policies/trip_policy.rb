@@ -2,12 +2,7 @@ class TripPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      if user.admin?
-        scope.all
-       # For a multi-tenant SaaS app, you may want to use:
-      else
-        scope.where(user: user)
-      end
+      scope.all
     end
   end
 
