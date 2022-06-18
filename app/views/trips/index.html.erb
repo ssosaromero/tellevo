@@ -1,30 +1,32 @@
 
 <div class="container">
-  <div class="m-5 justify-content-center text-center">
-    <div class="btn aqua-gradient btn-rounded btn-sm my-0">
-      <%= form_tag trips_path, class:"d-flex", method: :get do %>
-        <%= text_field_tag :query,
-          params[:query],
-          class: "form-control me-2",
-          placeholder: "Find a trip"
-        %>
+  <div class="m-3 justify-content-center text-center">
+    <div class="d-flex">
+      <div>
+        <%= form_tag trips_path, class:"d-flex", method: :get do %>
+          <%= text_field_tag :query,
+            params[:query],
+            class: "form-control me-2",
+            placeholder: "Find a trip"%>
         <%= submit_tag "Search", class: "btn btn-primary" %>
-      <% end %>
+        <% end %>
+      </div>
+      <div class="margin">
+        <h1><%= link_to 'New Trip', new_trip_path, class:"btn btn-primary" %></h1>
+      </div>
     </div>
-    <h1 style="font-family: 'Koulen';">Available Trips</h1>
+    <h1>Available Trips</h1>
   </div>
-  <h1 style= "margin: .5em"><%= link_to 'New Trip', new_trip_path, class:"btn btn-primary" %></h1>
   <div class="row" style= "margin: 1em">
     <% @trips.each do |trip| %>
-      <% if trip.number_of_passengers - trip.passengers_count > 0 %>
+      <% if (trip.number_of_passengers - trip.passengers_count) > 0 %>
         <div class="col-12 col-lg-3 card me-3">
           <div class="card-body">
             <h3 class="card-title text-center">From: <%= trip.starting_point %></h3>
             <h3 class="card-title text-center">To: <%= trip.end_point %></h3>
             <ul class="style-list">
-              <li>Passengers: <%= '<i class="fas fa-user" style="margin-right: 4px;" ></i>'.html_safe * trip.number_of_passengers %></li>
+              <li>Passengers: <%= '<i class="fas fa-user" style="color: #36AE7C; margin-right: 4px;" ></i>'.html_safe * (trip.number_of_passengers - trip.passengers_count) %> <%= '<i class="fas fa-user" style="color: #EB5353; margin-right: 4px;" ></i>'.html_safe * trip.passengers_count %> </li>
               <li>Start time: <%= time_tag(trip.departure_time) %></li>
-              <li>Available seats: <%= '<i class="fas fa-chair" style="color: red; margin-right: 4px;"></i>'.html_safe * (trip.number_of_passengers - trip.passengers_count) %></li>
             </ul>
             <h5>Driver:</h5>
             <p><%= trip.user.first_name %> <%= trip.user.last_name %></p>
