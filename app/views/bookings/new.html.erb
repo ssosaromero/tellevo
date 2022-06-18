@@ -1,6 +1,18 @@
-<%= simple_form_for [@trip, @booking] do |f|  %>
-  <%= f.input :passengers %>
-  <%= f.submit %>
-<% end %>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6 m-3">
 
-<%= link_to 'Back', trips_path, class:"btn btn-info"%>
+      <h1>How many passengers?</h1>
+
+      <%= simple_form_for [@trip, @booking] do |f|  %>
+        <%= f.input :passengers,label: false %>
+        <%= f.submit %>
+      <% end %>
+
+      <div class="mt-3">
+        <%= link_to 'Back', trips_path, class:"btn btn-info"%>
+      </div>
+
+    </div>
+  </div>
+</div>
