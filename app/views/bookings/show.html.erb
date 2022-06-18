@@ -1,12 +1,19 @@
-<h1> Your Booking </h1>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6 m-3">
+      <h1> Your Booking </h1>
+      <div class="card p-3 mb-3">
+        <h3>Status: <%= @booking.status %></h3>
+        <h4>Driver: <%= @booking.trip.user.first_name %></h4>
+        <ul class="style-list">
+          <li>Passengers: <%= '<i class="fas fa-user" style="color: #36AE7C; margin-right: 4px;" ></i>'.html_safe * @booking.passengers %></li>
+          <li>From: <%= @booking.trip.starting_point %></li>
+          <li>To: <%= @booking.trip.end_point %></li>
+          <li>When: <%= time_tag(@booking.trip.departure_time) %></li>
+        </ul>
+      </div>
 
-<h3>Status: <%= @booking.status %></h3>
-<h4>Driver: <%= @booking.trip.user.first_name %></h4>
-<ul>
-  <li>Passengers: <%= @booking.passengers %></li>
-  <li>From: <%= @booking.trip.starting_point %></li>
-  <li>To: <%= @booking.trip.end_point %></li>
-  <li>When: <%= @booking.trip.departure_time %></li>
-</ul>
-
-<%= link_to 'Back', trips_path, class:"btn btn-info"%>
+      <%= link_to 'Back', trips_path, class:"btn btn-info"%>
+    </div>
+  </div>
+</div>
