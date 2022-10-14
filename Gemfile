@@ -27,6 +27,7 @@ gem 'devise'
 gem 'pundit'
 gem "geocoder"
 gem 'cloudinary', '~> 1.16.0'
+gem 'bootstrap', '~> 5.2', '>= 5.2.1'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
