@@ -1,0 +1,21 @@
+.banner {
+  height: 527px;
+  background-size: cover;
+  background-position: center;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)), url('handyman-banner.jpeg');
+  margin: 0, auto;
+  padding-top: 5px;
+
+  h1 {
+    color: #F4E1A6;
+    font-size: 10rem;
+    font-family: 'Teko', sans-serif;
+    font-weight: 100;
+  }
+
+  h2 {
+    color: #FFFFFF;
+    // font-family: 'Montserrat', sans-serif;
+    font-size: 30px;
+  }
+}
